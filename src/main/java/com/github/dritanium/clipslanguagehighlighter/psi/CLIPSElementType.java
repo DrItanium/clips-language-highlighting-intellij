@@ -1,5 +1,6 @@
-package com.github.dritanium.clipslanguagehighlighter;
+package com.github.dritanium.clipslanguagehighlighter.psi;
 
+import com.github.dritanium.clipslanguagehighlighter.CLIPSLanguage;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
