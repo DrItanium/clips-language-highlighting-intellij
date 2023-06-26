@@ -1,4 +1,4 @@
-package com.github.dritanium.clipslanguagehighlightingintellij.listeners
+package com.github.dritanium.clipslanguagehighlighter.listeners
 
 import com.intellij.openapi.application.ApplicationActivationListener
 import com.intellij.openapi.diagnostic.thisLogger

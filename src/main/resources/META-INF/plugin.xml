@@ -1,7 +1,7 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.dritanium.clipslanguagehighlightingintellij</id>
-    <name>clips-language-highlighting-intellij Template</name>
+    <id>com.github.dritanium.clipslanguagehighlighter</id>
+    <name>CLIPS Language Support</name>
     <vendor>dritanium</vendor>
 
     <depends>com.intellij.modules.platform</depends>
@@ -9,15 +9,15 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.dritanium.clipslanguagehighlightingintellij.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <toolWindow factoryClass="com.github.dritanium.clipslanguagehighlighter.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.dritanium.clipslanguagehighlightingintellij.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
+        <listener class="com.github.dritanium.clipslanguagehighlighter.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
     </applicationListeners>
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="CLIPS File"
-                  implementationClass="com.github.dritanium.clipslanguagehighlightingintellij.CLIPSFileType"
+                  implementationClass="com.github.dritanium.clipslanguagehighlighter.CLIPSFileType"
                   fieldName="INSTANCE"
                   language="CLIPS"
                   extensions="clp"/>

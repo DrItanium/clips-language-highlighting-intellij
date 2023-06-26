@@ -1,4 +1,4 @@
-package com.github.dritanium.clipslanguagehighlightingintellij.toolWindow
+package com.github.dritanium.clipslanguagehighlighter.toolWindow
 
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
@@ -8,8 +8,8 @@ import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBPanel
 import com.intellij.ui.content.ContentFactory
-import com.github.dritanium.clipslanguagehighlightingintellij.MyBundle
-import com.github.dritanium.clipslanguagehighlightingintellij.services.MyProjectService
+import com.github.dritanium.clipslanguagehighlighter.MyBundle
+import com.github.dritanium.clipslanguagehighlighter.services.MyProjectService
 import javax.swing.JButton
 
 

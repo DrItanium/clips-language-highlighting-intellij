@@ -1,4 +1,4 @@
-package com.github.dritanium.clipslanguagehighlightingintellij;
+package com.github.dritanium.clipslanguagehighlighter;
 
 import com.intellij.lang.Language;
 public class CLIPSLanguage extends Language {

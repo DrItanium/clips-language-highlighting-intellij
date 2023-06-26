@@ -1,9 +1,9 @@
-package com.github.dritanium.clipslanguagehighlightingintellij.services
+package com.github.dritanium.clipslanguagehighlighter.services
 
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.project.Project
-import com.github.dritanium.clipslanguagehighlightingintellij.MyBundle
+import com.github.dritanium.clipslanguagehighlighter.MyBundle
 
 @Service(Service.Level.PROJECT)
 class MyProjectService(project: Project) {

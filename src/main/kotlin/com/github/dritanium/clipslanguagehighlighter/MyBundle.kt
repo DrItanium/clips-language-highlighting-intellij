@@ -1,4 +1,4 @@
-package com.github.dritanium.clipslanguagehighlightingintellij
+package com.github.dritanium.clipslanguagehighlighter
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls
