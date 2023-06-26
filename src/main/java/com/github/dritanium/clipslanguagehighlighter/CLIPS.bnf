@@ -1,0 +1,33 @@
+{
+    parserClass="com.github.dritanium.clipslanguagehighlighter.CLIPSParser"
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+    psiClassPrefix="CLIPS"
+    psiImplClassSuffix="Impl"
+    psiPackage="com.github.dritanium.clipslanguagehighlighter.psi"
+    psiImplPackage="com.github.dritanium.clipslanguagehighlighter.psi.impl"
+
+    elementTypeHolderClass="com.github.dritanium.clipslanguagehighlighter.psi.CLIPSTypes"
+    elementTypeClass="com.github.dritanium.clipslanguagehighlighter.psi.CLIPSElementType"
+    tokenTypeClass="com.github.dritanium.clipslanguagehighlighter.psi.CLIPSTokenType"
+}
+
+clipsFile ::= item_*
+
+private item_ ::= <deffacts-construct>|<deftemplate-construct>| <defglobal-construct>| <defrule-construct>| <deffunction-construct>| <defgeneric-construct>| <defmethod-construct>| <defclass-construct>| <definstance-construct>| <defmessage-handler-construct>|<defmodule-construct>
+
+<function-call> ::= '(' <function-name> <expression>* ')'
+<expression> ::= <constant> | <variable> | <function-call>
+<global-variable> ::= '?'*<symbol>*
+<multifield-variable> ::= '$?'<variable-symbol>
+<single-field-variable> ::= '?'<variable-symbol>
+<action> ::= <expression>
+<variable> ::= <single-field-variable> | <multifield-variable> | <global-variable>
+<deffacts-construct> ::= '(' 'deffacts' <deffacts-name> [ <comment> ] <rhs-pattern>* ')'
+<deftemplate-construct> ::= '(' 'deftemplate' <deftemplate-name> [ <comment> ] <slot-definition>* ')'
+<slot-definition> ::= <single-slot-definition> | multislot-definition
+<single-slot-definition> ::= '(' 'slot' <slot-name> <template-attribute>* ')'
+<multislot-definition> ::= '(' 'multislot' <slot-name> <template-attribute>* ')'
+<template-attribute> ::= <default-attribute> | <constraint-attribute>
+<default-attribute> ::= '(' 'default' ('?DERIVE' | '?NONE' | <expression>*) ')' |
+                        '(' 'default-dynamic' <expression>* ')'
