@@ -16,14 +16,23 @@ clipsFile ::= item_*
 
 private item_ ::= <deffacts-construct>|<deftemplate-construct>| <defglobal-construct>| <defrule-construct>| <deffunction-construct>| <defgeneric-construct>| <defmethod-construct>| <defclass-construct>| <definstance-construct>| <defmessage-handler-construct>|<defmodule-construct>
 
+<number> ::= <float> | <integer>
+<lexeme> ::= <symbol> | <string>
+<constant> ::= <symbol> | <string> | <integer> | <float> | <instance-name>
 <function-call> ::= '(' <function-name> <expression>* ')'
 <expression> ::= <constant> | <variable> | <function-call>
+<comment> ::= <string>
 <global-variable> ::= '?'*<symbol>*
 <multifield-variable> ::= '$?'<variable-symbol>
 <single-field-variable> ::= '?'<variable-symbol>
 <action> ::= <expression>
 <variable> ::= <single-field-variable> | <multifield-variable> | <global-variable>
+<deffacts-name> ::= <symbol>
+<slot-name> ::= <symbol>
+<deftemplate-name> ::= <symbol>
+
 <deffacts-construct> ::= '(' 'deffacts' <deffacts-name> [ <comment> ] <rhs-pattern>* ')'
+
 <deftemplate-construct> ::= '(' 'deftemplate' <deftemplate-name> [ <comment> ] <slot-definition>* ')'
 <slot-definition> ::= <single-slot-definition> | multislot-definition
 <single-slot-definition> ::= '(' 'slot' <slot-name> <template-attribute>* ')'
@@ -31,3 +40,42 @@ private item_ ::= <deffacts-construct>|<deftemplate-construct>| <defglobal-const
 <template-attribute> ::= <default-attribute> | <constraint-attribute>
 <default-attribute> ::= '(' 'default' ('?DERIVE' | '?NONE' | <expression>*) ')' |
                         '(' 'default-dynamic' <expression>* ')'
+
+<RHS-pattern> ::= <ordered-RHS-pattern> | <template-RHS-pattern>
+<ordered-RHS-pattern> ::= '(' <symbol> <RHS-field>+ ')'
+<template-RHS-pattern> ::= '(' <deftemplate-name> <RHS-slot>* ')'
+<RHS-slot> ::= <single-field-RHS-slot> | <multifield-RHS-slot>
+<single-field-RHS-slot> ::= '(' <slot-name> <RHS-field> ')'
+<multifield-RHS-slot> ::= '(' <slot-name> <RHS-field>* ')'
+<RHS-field> ::= <variable> | <constant> | <function-call>
+
+// constraint attribute
+<constraint-attribute> ::= <type-attribute> | <allowed-constant-attribute> | <range-attribute> | <cardinality-attribute>
+<type-attribute> ::= '(' 'type' <type-specification> ')'
+<type-specification> ::= <allowed-type>+ | '?VARIABLE'
+<allowed-type> ::= 'SYMBOL' | 'STRING' | 'LEXEME' | 'INTEGER' | 'FLOAT' | 'NUMBER' | 'INSTANCE-NAME' | 'INSTANCE-ADDRESS' | 'INSTANCE' | 'EXTERNAL-ADDRESS' | 'FACT-ADDRESS'
+<allowed-constant-attribute> ::=
+'(' 'allowed-symbols' <symbol-list> ')' |
+'(' 'allowed-strings' <string-list> ')' |
+'(' 'allowed-lexemes' <lexeme-list> ')' |
+'(' 'allowed-integers' <integer-list> ')' |
+'(' 'allowed-floats' <float-list> ')' |
+'(' 'allowed-numbers' <number-list> ')' |
+'(' 'allowed-instance-names' <instance-name-list> ')' |
+'(' 'allowed-classes' <class-name-list> ')' |
+'(' 'allowed-values' <value-list> ')'
+
+<symbol-list> ::= <symbol>+ | '?VARIABLE'
+<string-list> ::= <string>+ | '?VARIABLE'
+<lexeme-list> ::= <lexeme>+ | '?VARIABLE'
+<integer-list> ::= <integer>+ | '?VARIABLE'
+<float-list> ::= <float>+ | '?VARIABLE'
+<number-list> ::= <number>+ | '?VARIABLE'
+<instance-name-list> ::= <instance-name>+ | '?VARIABLE'
+<class-name-list> ::= <class-name>+ | '?VARIABLE'
+<value-list> ::= <constant>+ | '?VARIABLE'
+
+<range-attribute> ::= '(' 'range' <range-specification> <range-specification> ')'
+<range-specification> ::= <number> | '?VARIABLE'
+<cardinality-attribute> ::= '(' 'cardinality' <cardinality-specification> <cardinality-specification> ')'
+<cardinality-specification> ::= <integer> | '?VARIABLE'
