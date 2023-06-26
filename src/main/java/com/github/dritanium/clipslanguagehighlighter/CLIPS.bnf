@@ -63,6 +63,18 @@ private item_ ::= <deffacts-construct>|<deftemplate-construct>| <defglobal-const
 <test-CE> ::= '(' 'test' <function-call> ')'
 <exists-CE> ::= '(' 'exists' <conditional-element>+ ')'
 <forall-CE> ::= '(' 'forall' <conditional-element> <conditional-element>+ ')'
+<ordered-pattern-CE> ::= '(' <symbol> <constraint>* ')'
+<template-pattern-CE> ::= '(' <deftemplate-name> <LHS-slot>* ')'
+<object-pattern-CE> ::= '(' 'object' <attribute-constraint>* ')'
+<attribute-constraint> ::= '(' 'is-a' <constraint> ')' | '(' 'name' <constraint> ')' | '(' <slot-name> <constraint>* ')'
+<LHS-slot> ::= <single-field-LHS-slot> | <multifield-LHS-slot>
+<single-field-LHS-slot> ::= '(' <slot-name> <constraint> ')'
+<multifield-LHS-slot> ::= '(' <slot-name> <constraint>* ')'
+<constraint> ::= '?' | '$?' | <connected-constraint>
+<connected-constraint> ::= <single-constraint> | <single-constraint> '&' <connected-constraint> | <single-constraint> '|' <connected-constraint>
+<single-constraint> ::= <term> | '~'<term>
+<term> ::= <constant> | <single-field-variable> | <multifield-variable> | ':'<function-call> | '='<function-call>
+
 // defmodule construct
 <defmodule-construct> ::= '(' 'defmodule' <module-name> <comment>? <port-specification>* ')'
 <port-specification> ::= '(' 'export' <port-item> ')' | '(' 'import' <module-name> <port-item> ')'
