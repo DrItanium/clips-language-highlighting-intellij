@@ -15,4 +15,11 @@
     <applicationListeners>
         <listener class="com.github.dritanium.clipslanguagehighlightingintellij.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
     </applicationListeners>
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="CLIPS File"
+                  implementationClass="com.github.dritanium.clipslanguagehighlightingintellij.CLIPSFileType"
+                  fieldName="INSTANCE"
+                  language="CLIPS"
+                  extensions="clp"/>
+    </extensions>
 </idea-plugin>
