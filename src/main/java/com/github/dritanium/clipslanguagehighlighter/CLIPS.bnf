@@ -22,7 +22,7 @@ private item_ ::= <deffacts-construct>|<deftemplate-construct>| <defglobal-const
 <function-call> ::= '(' <function-name> <expression>* ')'
 <expression> ::= <constant> | <variable> | <function-call>
 <comment> ::= <string>
-<global-variable> ::= '?'*<symbol>*
+<global-variable> ::= '?*'<symbol>'*'
 <multifield-variable> ::= '$?'<variable-symbol>
 <single-field-variable> ::= '?'<variable-symbol>
 <action> ::= <expression>
@@ -74,7 +74,13 @@ private item_ ::= <deffacts-construct>|<deftemplate-construct>| <defglobal-const
 <connected-constraint> ::= <single-constraint> | <single-constraint> '&' <connected-constraint> | <single-constraint> '|' <connected-constraint>
 <single-constraint> ::= <term> | '~'<term>
 <term> ::= <constant> | <single-field-variable> | <multifield-variable> | ':'<function-call> | '='<function-call>
-
+// defglobal construct
+<defglobal-construct> ::= '(' 'defglobal'  [<defmodule-name>] <global-assignment>* ')'
+<global-assignment> ::= <global-variable> '=' <expression>
+// deffunction construct
+<deffunction-construct> ::= '(' 'deffunction' <name> [<comment>] '(' <regular-parameter>* [<wildcard-parameter>] ')' <action>* ')'
+<regular-parameter> ::= <single-field-variable>
+<wildcard-parameter> ::= <multifield-variable>
 // defmodule construct
 <defmodule-construct> ::= '(' 'defmodule' <module-name> <comment>? <port-specification>* ')'
 <port-specification> ::= '(' 'export' <port-item> ')' | '(' 'import' <module-name> <port-item> ')'
