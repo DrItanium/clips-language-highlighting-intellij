@@ -14,7 +14,7 @@
 
 clipsFile ::= item_*
 
-private item_ ::= <deffacts-construct>|<deftemplate-construct>| <defglobal-construct>| <defrule-construct>| <deffunction-construct>| <defgeneric-construct>| <defmethod-construct>| <defclass-construct>| <definstance-construct>| <defmessage-handler-construct>|<defmodule-construct>
+private item_ ::= <deffacts-construct>|<deftemplate-construct>| <defglobal-construct>| <defrule-construct>| <deffunction-construct>| <defgeneric-construct>| <defmethod-construct>| <defclass-construct>| <definstances-construct>| <defmessage-handler-construct>|<defmodule-construct>
 
 <number> ::= <float> | <integer>
 <lexeme> ::= <symbol> | <string>
@@ -30,7 +30,22 @@ private item_ ::= <deffacts-construct>|<deftemplate-construct>| <defglobal-const
 <deffacts-name> ::= <symbol>
 <slot-name> ::= <symbol>
 <deftemplate-name> ::= <symbol>
-
+<integer-expression> ::= <expression> // which returns an integer
+// these are special kinds of symbols which have extra requirements
+<instance-name> ::= <symbol>
+<function-name> ::= <symbol>
+<rule-name> ::= <symbol>
+<defmodule-name> ::= <symbol>
+<class-name> ::= <symbol>
+<superclass-name> ::= <symbol>
+<construct-name> ::= <symbol>
+<module-name> ::= <symbol>
+<slot-name-expression> ::= <symbol>
+<class-name-expression> ::= <symbol>
+<message-name> ::= <symbol>
+<variable-symbol> ::= <symbol> // a symbol beginning with an alphabetic character
+<instance-name-expression> ::= <symbol>
+<definstances-name> ::= <symbol>
 <deffacts-construct> ::= '(' 'deffacts' <deffacts-name> [ <comment> ] <RHS-pattern>* ')'
 
 <deftemplate-construct> ::= '(' 'deftemplate' <deftemplate-name> [ <comment> ] <slot-definition>* ')'
@@ -108,6 +123,15 @@ private item_ ::= <deffacts-construct>|<deftemplate-construct>| <defglobal-const
 <handler-documentation> ::= '(' 'message-handler' <name> [<handler-type>] ')'
 <handler-type> ::= 'primary' | 'around' | 'before' | 'after'
 
+// defmessage-handler construct
+<defmessage-handler-construct> ::= '(' 'defmessage-handler' <class-name> <message-name> [<handler-type>] [<comment>] '('<parameter>* [<wildcard-parameter>]')' <action>*')'
+<parameter> ::= <single-field-variable>
+
+// definstances construct
+<definstances-construct> ::= '(' 'definstances' <definstances-name> ['active'] [<comment>] <instance-template>* ')'
+<instance-template> ::= '('<instance-definition>')'
+<instance-definition> ::= <instance-name-expression> 'of' <class-name-expression> <slot-override>*
+<slot-override> ::= '(' <slot-name-expression> <expression>* ')'
 
 
 // defmodule construct
