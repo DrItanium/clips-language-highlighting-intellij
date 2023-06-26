@@ -31,7 +31,7 @@ private item_ ::= <deffacts-construct>|<deftemplate-construct>| <defglobal-const
 <slot-name> ::= <symbol>
 <deftemplate-name> ::= <symbol>
 
-<deffacts-construct> ::= '(' 'deffacts' <deffacts-name> [ <comment> ] <rhs-pattern>* ')'
+<deffacts-construct> ::= '(' 'deffacts' <deffacts-name> [ <comment> ] <RHS-pattern>* ')'
 
 <deftemplate-construct> ::= '(' 'deftemplate' <deftemplate-name> [ <comment> ] <slot-definition>* ')'
 <slot-definition> ::= <single-slot-definition> | multislot-definition
