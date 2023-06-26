@@ -48,6 +48,11 @@ private item_ ::= <deffacts-construct>|<deftemplate-construct>| <defglobal-const
 <single-field-RHS-slot> ::= '(' <slot-name> <RHS-field> ')'
 <multifield-RHS-slot> ::= '(' <slot-name> <RHS-field>* ')'
 <RHS-field> ::= <variable> | <constant> | <function-call>
+// defmodule construct
+<defmodule-construct> ::= '(' 'defmodule' <module-name> <comment>? <port-specification>* ')'
+<port-specification> ::= '(' 'export' <port-item> ')' | '(' 'import' <module-name> <port-item> ')'
+<port-item> ::= '?ALL' | '?NONE' | <port-construct> '?ALL' | <port-construct> '?NONE' | <port-construct> <construct-name>+
+<port-construct> ::= 'deftemplate' | 'defclass' | 'defglobal' | 'deffunction' | 'defgeneric'
 
 // constraint attribute
 <constraint-attribute> ::= <type-attribute> | <allowed-constant-attribute> | <range-attribute> | <cardinality-attribute>
