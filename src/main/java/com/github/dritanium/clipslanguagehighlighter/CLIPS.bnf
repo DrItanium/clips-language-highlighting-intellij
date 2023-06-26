@@ -40,7 +40,7 @@ private item_ ::= <deffacts-construct>|<deftemplate-construct>| <defglobal-const
 <template-attribute> ::= <default-attribute> | <constraint-attribute>
 <default-attribute> ::= '(' 'default' ('?DERIVE' | '?NONE' | <expression>*) ')' |
                         '(' 'default-dynamic' <expression>* ')'
-
+// fact specification
 <RHS-pattern> ::= <ordered-RHS-pattern> | <template-RHS-pattern>
 <ordered-RHS-pattern> ::= '(' <symbol> <RHS-field>+ ')'
 <template-RHS-pattern> ::= '(' <deftemplate-name> <RHS-slot>* ')'
@@ -48,6 +48,21 @@ private item_ ::= <deffacts-construct>|<deftemplate-construct>| <defglobal-const
 <single-field-RHS-slot> ::= '(' <slot-name> <RHS-field> ')'
 <multifield-RHS-slot> ::= '(' <slot-name> <RHS-field>* ')'
 <RHS-field> ::= <variable> | <constant> | <function-call>
+// defrule construct
+<defrule-construct> ::= '(' 'defrule' <rule-name> [<comment>] [<declaration>] <conditional-element>* '=>' <action>* ')'
+<declaration> ::= '(' 'declare' <rule-property>+ ')'
+<rule-property> ::= '(' 'salience' <integer-expression> ')' | '(' 'auto-focus' <boolean-symbol> ')'
+<boolean-symbol> ::= 'TRUE' | 'FALSE'
+<conditional-element> ::= <pattern-CE> | <assigned-pattern-CE> | <not-CE> | <and-CE> | <or-CE> | <logical-CE> | <test-CE> | <exists-CE> | <forall-CE>
+<pattern-CE> ::= <ordered-pattern-CE> | <template-pattern-CE> | <object-pattern-CE>
+<assigned-pattern-CE> ::= <single-field-variable> '<-' <pattern-CE>
+<not-CE> ::= '(' 'not' <conditional-element> ')'
+<and-CE> ::= '(' 'and' <conditional-element>+ ')'
+<or-CE> ::= '(' 'or' <conditional-element>+ ')'
+<logical-CE> ::= '(' 'logical' <conditional-element>+ ')'
+<test-CE> ::= '(' 'test' <function-call> ')'
+<exists-CE> ::= '(' 'exists' <conditional-element>+ ')'
+<forall-CE> ::= '(' 'forall' <conditional-element> <conditional-element>+ ')'
 // defmodule construct
 <defmodule-construct> ::= '(' 'defmodule' <module-name> <comment>? <port-specification>* ')'
 <port-specification> ::= '(' 'export' <port-item> ')' | '(' 'import' <module-name> <port-item> ')'
